@@ -1,0 +1,155 @@
+//Ex 9 Pgm 3
+//Programmed by AUMRUDH LAL KUMAR TJ
+//Program to do bank calc.
+#include<iostream>
+#include<string>
+using namespace std;
+class bank
+{
+     public:
+             int ano;
+						 string name;
+             float balance;
+      public:
+            //  int ano;
+              bank(int ta=0,string tn="",float tb=0.0)
+              {
+                ano=ta;
+                name=tn;
+                balance=tb;
+              }
+              friend ostream& operator<<(ostream &, bank &);
+              bool operator==(bank &ta)
+              {
+                return(ano=ta.ano);
+              }
+              bool operator<(bank &ta)
+              {
+                return(ano<ta.ano);
+              }
+};
+ostream& operator<<(ostream&tout,bank &temp)
+{
+  tout<<"Account Number: "<<temp.ano;
+  tout<<"Name: "<<temp.name;
+  tout<<"Balance: "<<temp.balance;
+  return tout;
+}
+template<typename type>
+int search(type b[],type key)
+{
+   for(int i=0;i<3;i++)
+    {
+       if(b[i]==key)
+       return i;
+    }
+   return -1;
+}
+template<typename type1>
+class stack
+{
+   private:
+            int top;
+					  type1 a[10];
+    public:
+           stack()
+           {
+            top=0;
+           }
+           void push(type1);
+           type1 pop();
+};
+template<typename type1>
+void stack<type1>::push(type1 value)
+{
+   if(top>9)
+   {
+    cout<<"Stack underflow\n";
+   }
+   else
+   {
+     a[top]=value;
+     top++;
+   }
+}
+template<typename type1>
+type1 stack<type1>::pop()
+{
+   if(top==0)
+    {
+      cout<<"Stack underflow\n";
+    }
+   else
+    {
+      top--;
+      return a[top];
+    }
+}
+template< >
+class stack<bank>
+{
+   private:
+           int top;
+           int anoa[10];
+   public:
+           stack()
+            {
+              top=0;
+            }
+            void push(bank);
+            bank pop();
+};
+//template<>
+void stack<bank>::push(bank temp)
+{
+   if(top>9)
+   {
+    cout<<"Stack overflow\n";
+   }
+   else
+   {
+     anoa[top]=temp.ano;
+     top++;
+   }
+}
+//template<>
+bank stack<bank>::pop()
+{
+if(top==0)
+    {
+      cout<<"Stack underflow\n";
+    }
+   else
+    {
+      top--;
+      int tempno=anoa[top];
+      bank searching=search(b1,tempno);
+      return b1[searching];
+    }
+}
+bank b1[3]={bank(12,"naga",1000),
+            bank(15,"pranith",5000),
+            bank(25,"kumar",10000)
+           };
+main()
+{
+     bank   sta;
+     stack<int>s1;
+     s1.push(1);
+     s1.push(2);
+     cout<<s1.pop()<<"\n"<<s1.pop()<<"\n";
+     stack<string>st;
+     st.push("aumrudh");
+     st.push("rabi");
+     cout<<st.pop()<<"\n"<<st.pop()<<"\n";
+     stack<bank>tstack;
+     for(int i=0;i<3;i++)
+      {
+        tstack.push(b1[i]);
+      }
+     for(int i=0;i<3;i++)
+      {
+        sta=tstack.pop();
+        cout<<sta;
+      }
+}

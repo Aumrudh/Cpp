@@ -1,0 +1,447 @@
+Script started on Thu 21 Feb 2019 01:07:19 PM IST
+bash-3.2$ cat static.cpp
+//Ex 3 Pgm1
+//Programed by AUMRUDH LAL KUMAR TJ
+//Pgm to calculate no of cars
+#include<iostream>
+#include<string>
+using namespace std;
+class car
+{
+    public:
+             int vehicleno;
+             string cpname;
+             string mdname;
+             int yom;
+             static int bmw;
+             static int toyato;
+             static int hyundai;
+             static int honda;
+             static int other;
+             void readdetails();
+             void printdetails();
+};
+void car::readdetails()
+{
+     cout<<"Enter vehicle number\n";
+     cin>>vehicleno;
+     cout<<"Enter vehicle name\n";
+     cin>>cpname;
+     cout<<"Enter model name\n";
+     cin>>mdname;
+     cout<<"Enter date of manufacture\n";
+     cin>>yom;
+     if(cpname=="bmw")
+     {
+       bmw++;
+     }
+     else if(cpname=="toyato")
+     {
+       toyato++;
+     }
+     else if(cpname=="hyundai")
+     {
+      hyundai++;
+     }
+     else if(cpname=="honda")
+  {
+      honda++;
+     }
+     else
+     {
+      other++;
+     }
+}
+void car::printdetails()
+{
+    cout<<"Vehicle no: "<<vehicleno<<"\n";
+    cout<<"Vehicle name: "<<cpname<<"\n";
+    cout<<"Model Name: "<<mdname<<"\n";
+    cout<<"Manfacture year: "<<yom<<"\n";
+}
+int car::bmw;
+int car::toyato;
+int car::hyundai;
+int car::honda;
+int car::other;
+main()
+{
+    car c[50];
+    int i,n;
+    cout<<"Enter the no of cars\n";
+    cin>>n;
+    for(i=0;i<n;i++)
+    {
+     c[i].readdetails();
+    }
+   for(i=0;i<n;i++)
+    {
+    c[i].printdetails();
+    }
+   cout<<"The total no of cars in bmw: "<<car::bmw<<"\n";
+   cout<<"The total no of cars in toyota: "<<car::toyato<<"\n";
+   cout<<"The total no of cars in hyndai: "<<car::hyundai<<"\n";
+   cout<<"The total no of cars in honda: "<<car::honda<<"\n";
+   cout<<"The total no of other cars: "<<car::other<<"\n";
+}
+bash-3.2$ c++ static.cpp
+bash-3.2$ ./a.out
+Enter the no of cars
+3
+Enter vehicle number
+1
+Enter vehicle name
+bmw
+Enter model name
+xs
+Enter date of manufacture
+1989
+Enter vehicle number
+5555
+Enter vehicle name
+toyato
+Enter model name
+xs2
+Enter date of manufacture
+1999
+Enter vehicle number
+3333
+Enter vehicle name
+bmw
+Enter model name
+flash
+Enter date of manufacture
+2009
+Vehicle no: 1
+Vehicle name: mbw
+Model Name: xs
+Manfacture year: 1989
+Vehicle no: 5555
+Vehicle name: toyato
+Model Name: xs2
+Manfacture year: 1999
+Vehicle no: 3333
+Vehicle name: bmw
+Model Name: flash
+Manfacture year: 2009
+The total no of cars in bmw: 2
+The total no of cars in toyota: 1
+The total no of cars in hyndai: 0
+The total no of cars in honda: 0
+The total no of other cars: 0
+bash-3.2$ cat age.cpp
+//Excersie 3 Pgm 2
+//Programmed By AUMRUDH LAL KUMAR TJ
+//PRogram to print age>20
+#include<iostream>
+#include<string>
+using namespace std;
+class student
+{
+   private:
+           int rno;
+           string name;
+           string dep;
+           int age;
+   public:
+          void readdetails();
+          void print();
+   friend void findage(student[],int);
+};
+void findage(student s[],int n)
+{
+   for(int i=0;i<n;i++)
+   {
+   if(s[i].age>20)
+     {
+       s[i].print();
+     }
+   }     
+} 
+void student::readdetails()
+{
+    cout<<"Enter student Roll no\n";
+    cin>>rno;
+    cout<<"Enter name of student\n";
+    cin>>name;
+    cout<<"Enter department\n";
+    cin>>dep;
+    cout<<"Enter age\n";
+    cin>>age;
+}
+void student::print()
+{
+   cout<<"The Roll No "<<rno<<" belonging to "<<dep<<" department ";
+   cout<<" whose name is "<<name<<" is above 20 years and his age is ";
+   cout<<age<<"\n";
+}
+main()
+{
+    student stud[50];
+    int strength;
+    cout<<"Enter no of students\n";
+    cin>>strength;
+    for(int i=0;i<strength;i++)
+     {
+       stud[i].readdetails();
+     }
+    findage(stud,strength);
+}
+bash-3.2$ c++ age.cpp
+bash-3.2$ ./a.out
+Enter no of students
+3
+Enter student Roll no
+1
+Enter name of student
+abi
+Enter department
+it
+Enter age
+17
+Enter student Roll no
+2
+Enter name of student
+chandru
+Enter department
+it
+Enter age
+28
+Enter student Roll no
+3
+Enter name of student
+sanjai
+Enter department
+it
+Enter age
+19
+The Roll No 2 belonging to it department  whose name is chandru is above 20 years and his age is 28
+bash-3.2$ cat employee.cpp
+//Excersice 3 Program 3
+//programed by AUMRUDH LAL KUMAR TJ
+//Pgm to calculate tax
+#include<iostream>
+#include<string>
+using namespace std;
+class employee
+{ 
+  private:
+          int eno;
+          string name;
+          int gpay;
+  public:
+          int annualic;
+          float taxic;
+          void read();
+          void calc();
+ 					void print();
+   friend void taxem(employee,int);
+};
+void taxem(employee e[],int n)
+{
+    for(int i=0;i<n;i++)
+     {
+      if(e[i].annualic>250000)
+         {
+           e[i].print();
+         }
+      }
+}
+void employee::read()
+{
+   cout<<"Enter employee no\n";
+   cin>>eno;
+   cout<<"Enter name\n";
+   cin>>name;
+   cout<<"Enter gross pay\n";
+   cin>>gpay;
+}
+void employee::calc()
+{
+   annualic=12*gpay;
+   if(annualic>250000)
+   {
+   taxic=annualic*0.1;
+   }
+   else
+   {
+     taxic=0;
+   }
+}
+void employee::print()
+{
+   cout<<"Employee no: "<<eno;
+   cout<<"\nName\t:"<<name;
+   cout<<"\nGrosspay\t:"<<gpay;
+   cout<<"\nAnnual income\t:"<<annualic<<"\n";
+   cout<<"Tax Amount\t:"<<taxic<<"\n";
+}
+main()
+{
+   employee e[50];
+   int i,m;
+   cout<<"Enter number of employees\n";
+   cin>>m;
+   for(i=0;i<m;i++)
+    {
+      e[i].read();
+    }
+    for(i=0;i<m;i++)
+    e[i].calc();
+    taxem(e,m);
+    
+}
+bash-3.2$ c++ employee.cpp
+bash-3.2$ ./a.out
+Enter number of employees
+3
+Enter employee no
+1
+Enter name
+abi
+Enter gross pay
+30000
+Enter employee no
+2
+Enter name
+sanjai
+Enter gross pay
+50000
+Enter employee no
+3
+Enter name
+sam
+Enter gross pay
+15000
+Employee no: 1
+Name	:abi
+Grosspay	:30000
+Annual income	:360000
+Tax Amount	:36000
+Employee no: 2
+Name	:sanjai
+Grosspay	:50000
+Annual income	:600000
+Tax Amount	:60000
+bash-3.2$ cat bank.cpp
+//Ex-3 Pgm4
+//Programed by AUMRUDH LAL KUMAR TJ
+//Pgm to calculate si
+#include<iostream>
+#include<string>
+using namespace std;
+class bank
+{
+         int acno;
+         string name;
+         float deposit;
+         float withdraw;
+ public:
+        float balance;
+        void read();
+        void draw();
+        void dep();
+        void calc();
+};
+float si(float princ,int n=5,float r=0.5);
+void bank::read()
+{
+   cout<<"Enter account no\n";
+   cin>>acno;
+   cout<<"Enter name of account holder\n";
+   cin>>name;
+   cout<<"Enter the opening balance\n";
+   cin>>balance;
+}
+void bank::draw()
+{
+   cout<<"Enter the withdrawal amount\n";
+   cin>>withdraw;
+   if(balance>withdraw)
+   {
+   balance-=withdraw;
+   cout<<"The account no "<<acno<<" is debited with Rs "<<withdraw<<" and the new balance is "<<balance;
+   cout<<"\n";
+   }
+   else
+   {
+    cout<<"Balace is not sufficent";
+   }
+}
+void bank::dep()
+{
+   cout<<"Enter the deposite amount\n";
+   cin>>deposit;
+   balance+=deposit;
+   cout<<"The account no "<<acno<<" is credited with Rs "<<deposit<<" and the new balance is "<<balance;
+   cout<<"\n";
+}
+void bank::calc()
+{
+    cout<<"The intrest for this account is\n"<<si(balance)<<"\n";
+    balance+=si(balance);
+    cout<<"The new account balance is"<<balance<<"\n";
+}
+float si(float princ,int n,float r)
+{
+   return(princ*n*r)/100;
+}
+main()
+{
+    bank b;
+    int choice;
+    b.read();
+    cout<<"1.Deposit\n2.Withdraw\n";
+    cout<<"Enter your choice\n";
+    cin>>choice;
+    if(choice==1)
+    {
+      b.dep();
+    }
+    else  if(choice==2)
+    {
+      b.draw();
+    }
+    else
+    {
+     cout<<"Invalid Choice\n";
+    }
+    b.calc();
+}           
+bash-3.2$ c++ bank.cpp
+bash-3.2$ ./a.out
+Enter account no
+1562
+Enter name of account holder
+abi
+Enter the opening balance
+1000
+1.Deposit
+2.Withdraw
+Enter your choice
+1
+Enter the deposite amount
+100
+The account no 1562 is credited with Rs 100 and the new balance is 1100
+The intrest for this account is 27.5
+The new account balance is 1127.5
+bash-3.2$ ./a.out
+Enter account no
+1596
+Enter name of account holder
+sanjai
+Enter the opening balance
+2000
+1.Deposit
+2.Withdraw
+Enter your choice
+2
+Enter the withdrawal amount
+1000
+The account no 1596 is debited with Rs 1000 and the new balance is 1000
+The intrest for this account is 25
+The new account balance is 1025
+bash-3.2$ exit
+exit
+
+Script done on Thu 21 Feb 2019 01:10:35 PM IST

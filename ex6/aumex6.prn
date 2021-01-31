@@ -1,0 +1,387 @@
+Script started on Fri 08 Mar 2019 04:31:42 PM IST
+bash-3.2$ cat matrix.cpp
+//Operator Overloading
+//Ex 6 Program 1
+//Program to do matrix operation
+//Programmed by AUMRUDH LAL KUMAR TJ
+#include<iostream>
+#include<string>
+using namespace std;
+class matrix
+{
+  private:
+          int a[3][3];
+  public:
+     		 void show();
+ 			   matrix()
+         {
+           for(int i=0;i<3;i++)
+            {
+              for(int j=0;j<3;j++)
+               {
+                 a[i][j]=0;
+               }
+            }
+          }
+          matrix(int ta[][3])
+          {
+          for(int i=0;i<3;i++)
+            {
+              for(int j=0;j<3;j++)
+               {
+                 a[i][j]=ta[i][j];
+               }
+            }
+          }
+         matrix operator +(matrix tm)
+				{	
+   				 matrix r;
+    			{
+     				for(int i=0;i<3;i++)
+       				{
+        				for(int j=0;j<3;j++)
+         				 {
+          				 r.a[i][j]=a[i][j]+tm.a[i][j];
+          			}
+       				}
+     			}
+   				return r;
+        }
+				matrix operator *(matrix mt)
+				{
+    			matrix m;
+    		{
+     			for(int i=0;i<3;i++)
+       	{
+          for(int j=0;j<3;j++)
+          	{
+           		m.a[i][j]=0;
+           		for(int k=0;k<3;k++)
+            	{
+            		m.a[i][j]+=a[i][j]*mt.a[k][j];
+          	  }
+          	}
+      	 }
+   				return m;
+     			}
+				}
+};
+void matrix::show()
+{
+   for(int i=0;i<3;i++)
+            {
+              for(int j=0;j<3;j++)
+               {
+                 cout<<a[i][j]<<"\t";
+               }
+              cout<<"\n";
+            }
+    
+}
+main()
+{
+     int i,j;
+     int x[3][3],y[3][3];
+     cout<<"Enter the matrix 1\n";
+     {
+           for(int i=0;i<3;i++)
+            {
+              for(int j=0;j<3;j++)
+               {
+                 cin>>x[i][j];
+               }
+            }
+     }
+    cout<<"Enter the matrix 2\n";
+     {
+           for(int i=0;i<3;i++)
+            {
+              for(int j=0;j<3;j++)
+               {
+                 cin>>y[i][j];
+               }
+            }
+     }
+    matrix m1(x),m2(y),m3,m4;
+    cout<<"Entered matrix 1 is\n";
+    m1.show();
+    cout<<"Entered matrix 2 is\n";
+    m2.show();
+    m3=m1+m2;
+    cout<<"\nAdded matrix is\n";
+    m3.show();
+    cout<<"\nMultiplied matrix is\n";
+    m4=m1*m2;
+    m4.show();
+}
+bash-3.2$ c++ matrix.cpp
+bash-3.2$ ./a.out
+Enter the matrix 1
+1 2 3 
+4 5 6
+7 8 9
+Enter the matrix 2
+1 2 3
+4 5 6 
+7 8 9
+Entered matrix 1 is
+1	2	3	
+4	5	6	
+7	8	9	
+Entered matrix 2 is
+1	2	3	
+4	5	6	
+7	8	9	
+
+Added matrix is
+2	  4	  6	
+8	  10	12	
+14	16	18	
+
+Multiplied matrix is
+12	30	54	
+48	75	108	
+84	120	162	
+bash-3.2$ cat complex.cpp
+//Ex 6 Program 2
+//Program to Do complex operation
+//Programmed by AUMRUDH LAL KUMAR TJ
+#include<iostream>
+using namespace std;
+class Complex
+{
+  private:
+          float real;
+          float imag;
+  public:
+         Complex(float tr=0,float ti=0)
+         {
+          real=tr;
+          imag=ti;
+         }
+         Complex operator+(Complex c2)
+  		   {
+ 			   	Complex temp;
+					temp.real=real+c2.real;
+				  temp.imag=imag+c2.imag;
+ 				  return temp;
+         }
+         Complex operator*(Complex c2)
+         {
+           Complex temp;
+           temp.real=(real*c2.real)-(imag*c2.imag);
+           temp.imag=(real*c2.imag)+(imag*c2.real);
+       	   return temp;
+				 }
+         void operator()(float tx,float ty)
+				 {
+           real=tx;
+					 imag=ty;
+   			 }
+         friend istream&operator>>(istream &,Complex &);
+         friend ostream&operator<<(ostream &,Complex &);
+};
+istream&operator>>(istream &tin,Complex &c)
+{
+  cout<<"Enter Complex Number real and imaginary part\n";
+  tin>>c.real>>c.imag;
+  return tin;
+}
+ostream&operator<<(ostream &tout,Complex &c)
+{
+   tout<<"\nRealpart "<<c.real;
+   tout<<"\nImaginary part "<<c.imag;
+   tout<<"\nComplex number is "<<c.real<<"+"<<c.imag<<"i\n";
+   return tout;
+}
+main()
+{
+   Complex c1,c2,c3,c4;
+   c1(2,1);
+   c2(5,8);
+   c3=c1+c2;
+   c4=c1*c2;
+   cout<<c3;
+   cout<<c4;
+}
+
+bash-3.2$ c++ complex.cpp
+bash-3.2$ ./a.out
+
+Realpart 7
+Imaginary part 9
+Complex number is 7+9i
+
+Realpart 2
+Imaginary part 21
+Complex number is 2+21i
+bash-3.2$ cat stack.cpp
+//Ex6 Pgm 3
+//Program to do stack
+//Programmed by AUMRUDH LAL KUMAR TJ
+#include<iostream>
+using namespace std;
+class stack
+{
+ private:
+         int a[10];
+         int top;
+ public:
+        bool empty()
+        {
+          return(top==0);
+        }
+        bool full()
+        {
+          return(top==10);
+        }
+        stack()
+        {
+         top=0;
+        }
+        int operator-()
+        {
+          if(empty())
+           {
+             cout<<"Stack Underflow\n";
+           }
+          else
+           {
+            top--;
+            return a[top];
+           }
+        }
+        void operator+(int e)
+        {
+         if(full())
+          {
+            cout<<"Stack overflow\n";
+          }
+         else
+          {
+           a[top]=e;
+           top++;
+          }
+        }
+};
+main()
+{
+   stack s;
+   int choice,element,e;
+   while(true)
+   {
+   cout<<"Enter your choice\n";
+   cout<<"1-Push\n2-Pop\n3-Exit\n";
+   cin>>choice;
+   switch(choice)
+   {
+    case 1:
+            cout<<"Enter the element to be inserted\n";
+				    cin>>element;
+ 						s+element;
+  			    break;
+    case 2:
+           e=-s;
+           if(e!=0)
+           {
+            cout<<"The poped element is "<<e<<"\n";
+           }
+           else
+           {
+            cout<<"No element\n";
+           }
+       		  break;
+    case 3:
+           exit(0);
+   }
+   }
+}
+bash-3.2$ c++ stack.cpp
+bash-3.2$ ./a.out
+Enter your choice
+1-Push
+2-Pop
+3-Exit
+1
+Enter the element to be inserted
+25
+Enter your choice
+1-Push
+2-Pop
+3-Exit
+2
+The poped element is 25
+Enter your choice
+1-Push
+2-Pop
+3-Exit
+3
+bash-3.2$ cat convert.cpp
+//Ex6 Pgm 4
+//Program to convert from feet to metre and add it
+//Programmed by AUMRUDH LAL KUMAR TJ
+#include<iostream>
+using namespace std;
+class feet;
+class metre
+{
+  private:
+          float x;
+  public:
+         metre(float a=0.0)
+          {
+            x=a;
+          }
+         void display()
+          {
+            cout<<"The entered metre value "<<x<<"\n";
+          }
+         friend void operator +(metre,feet);
+};
+class feet
+{
+  private:
+          float y;
+  public:
+          feet(float b=0.0)
+           {
+             y=b;
+           }
+          void print()
+          {
+           cout<<"The Entered feet value is  "<<y<<"\n";
+          }
+        friend void operator +(metre,feet);
+};
+void operator +(metre tm,feet tf)
+{
+   float temp;
+   temp=tm.x+(tf.y/3.33);
+   cout<<"The Resultant value is "<<temp<<"\n";
+}
+main()
+{
+   float tm1,tf1;
+   cout<<"Enter the metre value\n";
+   cin>>tm1;
+   metre m(tm1);
+   cout<<"Enter feet value\n";
+   cin>>tf1;
+   feet f(tf1);
+   m.display();
+   f.print();
+   m+f;
+}
+bash-3.2$ c++ convert.cpp
+bash-3.2$ ./a.out
+Enter the metre value
+10
+Enter feet value
+6.66
+The entered metre value 10
+The Entered feet value is  6.66
+The Resultant value is 12
+bash-3.2$ exit
+exit
+
+Script done on Fri 08 Mar 2019 04:33:20 PM IST

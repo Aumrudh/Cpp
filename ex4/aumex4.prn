@@ -1,0 +1,280 @@
+Script started on Mon 25 Feb 2019 12:45:16 PM IST
+bash-3.2$ cat date.cpp
+#include<iostream>
+#include<string>
+using namespace std;
+class date
+{
+  public: 
+ 		     int day;
+         int month;
+ 				 int year;
+ public:
+         date()
+         {
+           day=0;
+           month=0;
+ 					 year=0;
+    		 }
+         date(int d,int m,int y)
+         {
+           day=d;
+           month=m;
+           year=y;
+         }
+};
+date calculation(date d1,date d2)
+{
+   date d3;
+   if(d1.day>d2.day)
+    {
+      d3.day=d1.day-d2.day;
+    }
+   else
+    {
+      d3.day=d2.day-d1.day;
+    }
+   if(d1.month>d2.month)
+    {
+      d3.month=d1.month-d2.month;
+    }
+   else
+    {
+      d3.month=d2.month-d1.month;
+    }
+   if(d1.year>d2.year)
+    {
+      d3.year=d1.year-d2.year;
+    }
+   else
+    {
+      d3.year=d2.year-d1.year;
+    }
+    return d3;
+}
+main()
+{
+    int a,b,c,d,e,f;
+    cout<<"Enter first date dd-mm-yyyy\n";
+    cin>>a>>b>>c;
+    cout<<"Enter second date dd-mm-yyyy\n";
+    cin>>d>>e>>f;
+    date start(a,b,c);
+    date end(d,e,f);
+    date diff;
+    diff=calculation(start,end);
+    cout<<"Difference between two dates is\n";
+    cout<<"Day :"<<diff.day;
+    cout<<"\nMonth :"<<diff.month;
+    cout<<"\nYear :"<<diff.year<<"\n";
+}
+bash-3.2$ c++ date.cpp
+bash-3.2$ ./a.out
+Enter first date dd-mm-yyyy
+25 03 2001
+Enter second date dd-mm-yyyy
+24 02 2019
+Difference between two dates is
+Day :1
+Month :1
+Year :18
+bash-3.2$ cat stack.cpp
+//Ex 4 Pgm 2
+//Programmed by AUMRUDH LAL KUMAR TJ
+//Program to check stack is empty or full
+#include<iostream>
+using namespace std;
+class stack
+{
+  private:
+           int top;
+           int a[10];
+  public:
+          stack()
+          {
+           top=0;
+          }
+          void push(int x);
+          int pop();
+          bool check();
+          bool checkp();
+};
+void stack::push(int x)
+{
+    if(check())
+     {
+       cout<<"Stack Overflow! Can't Insert\n";
+     }
+    else
+     {
+       a[top]=x;
+       top++;
+     }
+}
+int stack::pop()
+{
+    if(checkp())
+      {
+        cout<<"Stack underflow! Cannot pop\n";
+        return -1;
+      }
+    else
+      {
+        top--;
+        return a[top];
+      }
+}
+bool stack::check()
+{
+     return(top==10);
+}
+bool stack::checkp()
+{
+     return(top==0);
+}
+main()
+{
+     int n,m,choice;
+     stack s1;
+     while(1)
+     {
+      cout<<"Enter your choice\n";
+      cout<<"1-Push\n2.Pop\n3.Exit\n";
+      cin>>choice;
+      switch(choice)
+       {
+         case 1:
+                 cout<<"Enter push element\n";
+           			 cin>>n;
+                 s1.push(n);
+                 break;
+         case 2:
+                m=s1.pop();
+                if(m==-1)
+                {
+                  cout<<"No element\n";
+                }
+                else
+                {
+                cout<<"The pop element is "<<m<<"\n";
+                }
+                break;
+         case 3:
+                exit(0);
+       }
+     }
+} 
+bash-3.2$ c++ stack.cpp
+bash-3.2$ ./a.out
+Enter your choice
+1-Push
+2.Pop
+3.Exit
+1
+Enter push element
+10
+Enter your choice
+1-Push
+2.Pop
+3.Exit
+1
+Enter push element
+25
+Enter your choice
+1-Push
+2.Pop
+3.Exit
+2
+The pop element is 25
+Enter your choice
+1-Push
+2.Pop
+3.Exit
+2
+The pop element is 10
+Enter your choice
+1-Push
+2.Pop
+3.Exit
+2
+Stack underflow! Cannot pop
+No element
+Enter your choice
+1-Push
+2.Pop
+3.Exit
+3
+bash-3.2$ cat employee.cpp
+//Excersice 4 Program 3
+//programed by AUMRUDH LAL KUMAR TJ
+//Pgm to calculate tax(constructor)
+#include<iostream>
+#include<string>
+using namespace std;
+class employee
+{
+  private:
+          int eno;
+          string name;
+          int gpay;
+  public:
+          int annualic;
+          float taxic;
+          void read();
+          void calc();
+          void print();
+          void tax();
+  employee()
+  {
+    eno=0;
+    name="";
+    gpay=0;
+    annualic=0;
+    taxic=0;
+  }
+  employee(int eeno,string ename,int epay)
+  {
+    eno=eeno;
+    name=ename;
+    gpay=epay;
+    annualic=0;
+    taxic=0;
+  }
+};
+void employee::calc()
+{
+   annualic=12*gpay;
+   if(annualic>250000)
+   {
+   taxic=annualic*0.25;
+   print();
+   }
+}
+void employee::print()
+{
+   cout<<"Employee no: "<<eno;
+   cout<<"\nName\t:"<<name;
+   cout<<"\nGrosspay\t:"<<gpay;
+   cout<<"\nAnnual income\t:"<<annualic<<"\n";
+   cout<<"Tax Amount\t:"<<taxic<<"\n";
+}
+main()
+{
+   employee e;
+   employee e1(1,"ram",50000);
+   employee e2(2,"karthik",20000);
+   e.calc();
+   e1.calc();
+   e2.calc();  
+}
+bash-3.2$ c++ employee.cpp
+bash-3.2$ ./a.out
+Employee no: 1
+Name	:ram
+Grosspay	:50000
+Annual income	:600000
+Tax Amount	:150000
+bash-3.2$ exit
+exit
+
+Script done on Mon 25 Feb 2019 12:47:16 PM IST

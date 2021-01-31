@@ -1,0 +1,420 @@
+Script started on Wed 06 Mar 2019 10:28:27 AM IST
+bash-3.2$ cat stack.cpp
+//Ex 5 Program 1
+//Programmed by AUMRUDH LAL KUMAR TJ
+//Program to do stack
+#include<iostream>
+using namespace std;
+class stack
+{
+  private:
+  			  int capacity;
+			    int *s;
+   			  int top;
+   public:
+         	stack(int &size)
+   				{
+   				 top=0;
+					 s=new int[size];
+           capacity=size;
+          }
+          void push(int);
+          int pop();
+};
+void stack::push(int x)
+{
+   int ns;
+   if(top==capacity)
+   {
+ 		cout<<"Stackoverflow!\n";
+    cout<<"Enter new size\n";
+    cin>>ns;
+    s=new int[ns];
+    capacity=ns;
+    top=0;
+   }
+   else
+   {
+     s[top]=x;
+     top++;
+   }
+}
+int stack::pop()
+{
+   if(top==0)
+    {
+ 		 cout<<"Stack Underflow\n";
+     cout<<"No element\n";
+     int n;
+     cout<<"Enter number to push\n";
+     cin>>n;
+     push(n);      
+    }
+   else
+    {
+     top--;
+     return s[top];
+    }
+}
+main()
+{
+     int m,choice;
+     cout<<"Enter size\n";
+     cin>>m;
+     stack s(m);
+     while(true)
+     {
+      cout<<"1-Push\n2-Pop\n3.Exit\nEnter your choice\n";
+      cin>>choice;
+      switch(choice)
+       {
+        case 1:
+               int x;
+               cout<<"Enter push element\n";
+   						 cin>>x;
+          		 s.push(x);
+ 							 break;
+        case 2:
+               int a;
+           		 a=s.pop();
+               if(a!='\0')
+               {
+               cout<<"The pop element is "<<a<<"\n";
+               }
+               break;
+       case 3:
+              exit(1);
+       default:    
+     				   exit(1);
+      }
+    }
+}
+bash-3.2$ c++ stack.cpp
+bash-3.2$ ./a.out
+Enter size
+2
+1-Push
+2-Pop
+3.Exit
+Enter your choice
+1
+Enter push element
+25
+1-Push
+2-Pop
+3.Exit
+Enter your choice
+1
+Enter push element
+25
+1-Push
+2-Pop
+3.Exit
+Enter your choice
+1
+Enter push element
+26
+Stackoverflow!
+Enter new size
+10
+1-Push
+2-Pop
+3.Exit
+Enter your choice
+1
+Enter push element
+07
+1-Push
+2-Pop
+3.Exit
+Enter your choice
+2
+The pop element is 7
+1-Push
+2-Pop
+3.Exit
+Enter your choice
+2
+Stack Underflow
+No element
+Enter number to push
+16
+1-Push
+2-Pop
+3.Exit
+Enter your choice
+2
+The pop element is 16
+1-Push
+2-Pop
+3.Exit
+Enter your choice
+3
+bash-3.2$ cat bill.cpp
+//Excersie 5 Program 2
+//Programmed by AUMRUDH LAL KUMAR TJ
+//Program to calculate bill amount
+#include<iostream>
+#include<string>
+using namespace std;
+class Item
+{
+   public:
+  			   int ino;
+    			 string iname;
+					 int price;
+				   int quantity;
+           Item()
+         		{
+ 						 ino=0;
+					   iname="";
+ 					   price=0;
+						 quantity=0;
+            }
+           Item(int tn,string tin,int tp)
+            {
+              ino=tn;
+              iname=tin;
+				      price=tp;
+            }
+          
+           void printdetails()
+           {
+             cout<<"Item no: "<<ino<<"\n";
+             cout<<"Item Name: "<<iname<<"\n";
+             cout<<"Price: "<<price<<"\n";
+             cout<<"Quantity"<<quantity<<"\n";
+           }
+};
+class supplier
+{
+   private:     
+				   int sno;
+					 string sname;
+ 					 Item *it;
+           int billamt;
+   public:
+           supplier()
+            {
+              sno=0;
+              sname="";
+              billamt=0;
+              it=new Item[10];
+            }
+           supplier(string ts,int tsno,Item *ti)
+           {
+             sname=ts;
+						 sno=tsno;
+						 billamt=0;
+						 it=new Item[tsno];
+             for(int i=0;i<tsno;i++)
+             {
+               it[i]=ti[i];
+             }
+           }
+           void showdetails()
+           {
+             cout<<"Name"<<sname<<"\n";
+             cout<<"No. Of Item "<<sno<<"\n";
+             for(int i=0;i<sno;i++)
+             {
+               it[i].printdetails();
+             }
+             cout<<"Bill Amount "<<billamt<<"\n";
+           }
+           void calculatebill()
+  				 {
+             cout<<"Supplier Name " <<sname<<"\n";
+ 					   for(int i=0;i<sno;i++)
+              {
+                cout<<"Enter Quantity for "<<it[i].iname<<"\n";
+                cin>>it[i].quantity;
+                billamt+=it[i].price*it[i].quantity;
+              }
+           }
+           ~supplier()
+           {
+            delete []it;
+           }
+};
+main()
+{
+    Item items[6]={Item(1,"Chocolates",10),Item(2,"Bag",5),
+    Item(3,"Biscuits",20),Item(4,"Pen",15),
+    Item(5,"Pencils",25),Item(6,"Notebooks",10)};
+    supplier s1("Ram",5,items);
+    s1.calculatebill();
+    s1.showdetails();
+    supplier s2("Sam",3,items+2);
+    s2.calculatebill();
+    s2.showdetails();
+}            		 
+bash-3.2$ c++ bill.cpp
+bash-3.2$ ./a.out
+Supplier Name Ram
+Enter Quantity for Chocolates
+2
+Enter Quantity for Bag
+1
+Enter Quantity for Biscuits
+5
+Enter Quantity for Pen
+3
+Enter Quantity for Pencils
+10
+NameRam
+No. Of Item 5
+Item no: 1
+Item Name: Chocolates
+Price: 10
+Quantity2
+Item no: 2
+Item Name: Bag
+Price: 5
+Quantity1
+Item no: 3
+Item Name: Biscuits
+Price: 20
+Quantity5
+Item no: 4
+Item Name: Pen
+Price: 15
+Quantity3
+Item no: 5
+Item Name: Pencils
+Price: 25
+Quantity10
+Bill Amount 420
+Supplier Name Sam
+Enter Quantity for Biscuits
+10
+Enter Quantity for Pen
+0
+Enter Quantity for Pencils
+2
+NameSam
+No. Of Item 3
+Item no: 3
+Item Name: Biscuits
+Price: 20
+Quantity10
+Item no: 4
+Item Name: Pen
+Price: 15
+Quantity0
+Item no: 5
+Item Name: Pencils
+Price: 25
+Quantity2
+Bill Amount 250
+bash-3.2$ cat login.cpp
+//Excercie 5 Program 3
+//Programmed By AUMRUDH LAL KUMAR TJ
+//Program to count live number of students
+#include<iostream>
+#include<string>
+using namespace std;
+class live
+{
+   private:  
+  			   string name;
+  			   int ano;
+    		   static int tano;
+    public:
+           live()
+           {
+             tano++;
+             cout<<"You are Application number is : "<<tano<<"\n";
+             cout<<"Welcome\n";
+             cout<<"Total number of applicaton are :"<<tano<<"\n";
+           }
+           ~live()
+           {
+             tano--;
+             cout<<"Logout Successful\n";
+             cout<<"Total number of application are : "<<tano<<"\n";
+           }
+};
+int live::tano;
+main()
+{
+     live *a[100];
+     int i=0;
+     int ch;
+     while(true)
+      {
+        cout<<"1.New Application \n2.Logout\n3.Exit\n";
+        cout<<"Enter your choice\n";
+        cin>>ch;
+        if(ch==1)
+         {
+           if(i==100)
+            {
+              cout<<"Too many users\n";
+              exit(1);
+            }
+           else 
+            {
+              a[i]=new live;
+              i++;
+            }
+        }
+       else if(ch==2)
+         {
+           if(i==0)
+             {
+               cout<<"No application\n";
+               exit(1);
+             }
+           delete a[i-1];
+           i--;
+         }
+      else
+         {
+          exit(0);
+         }
+}
+}
+         
+            
+bash-3.2$ c++ login.cpp
+bash-3.2$ ./a.out
+1.New Application 
+2.Logout
+3.Exit
+Enter your choice
+1
+You are Application number is : 1
+Welcome
+Total number of applicaton are :1
+1.New Application 
+2.Logout
+3.Exit
+Enter your choice
+1
+You are Application number is : 2
+Welcome
+Total number of applicaton are :2
+1.New Application 
+2.Logout
+3.Exit
+Enter your choice
+2
+Logout Successful
+Total number of application are : 1
+1.New Application 
+2.Logout
+3.Exit
+Enter your choice
+2
+Logout Successful
+Total number of application are : 0
+1.New Application 
+2.Logout
+3.Exit
+Enter your choice
+3
+bash-3.2$ exit
+exit
+
+Script done on Wed 06 Mar 2019 10:31:00 AM IST

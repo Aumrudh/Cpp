@@ -1,0 +1,251 @@
+Script started on Thu 14 Feb 2019 12:51:06 PM IST
+bash-3.2$ cat volume.cpp
+//Excercise 2 Program 1
+//Programed by AUMRUDH LAL KUMAR TJ
+//Program to calculate volume of objects
+#include<iostream>
+using namespace std;
+float volume(int,int);     //cylinder volume
+float volume(float);       //sphere
+int volume(int);           //cube
+int volume(int,int,int);   //cuboid
+main()
+{
+     int r,h,a,l,b,h1;
+     float rad;
+     cout<<"Enter the radius and height of cylinder\n"; 
+     cin>>r>>h;
+     cout<<"Enter the sphere radius\n";
+     cin>>rad;
+     cout<<"Enter the cube side\n";
+     cin>>a;
+     cout<<"Enter the length , height ,breadth of cuboid\n";
+     cin>>l>>b>>h1;
+     cout<<"Volume of cylinder:\t"<<volume(r,h);
+     cout<<"\n";
+     cout<<"Volume of sphere:\t"<<volume(rad);
+     cout<<"\n";
+     cout<<"Volume of cube:\t\t"<<volume(a);
+     cout<<"\n";
+     cout<<"Volume of cuboid:\t"<<volume(l,b,h1);
+     cout<<"\n";
+}
+float volume(int r,int h)  //cylinder volume
+{
+    return (3.14*r*r*h);
+}
+float volume(float rad)  //sphere volume
+{
+    return ((4*3.14*rad*rad*rad)/3);
+}
+int volume(int a)  //cube volume
+{
+    return (a*a*a);
+}
+int volume(int l,int b,int h1)  //cylinder volume
+{
+    return (l*b*h1);
+}
+
+
+bash-3.2$ c++ volume.cpp
+bash-3.2$ ./a.out
+Enter the radius and height of cylinder
+4
+5
+Enter the sphere radius
+1.6
+Enter the cube side
+4
+Enter the length , height ,breadth of cuboid
+4 4 2
+Volume of cylinder:	251.2
+Volume of sphere:	17.1486
+Volume of cube:		64
+Volume of cuboid:	32
+bash-3.2$ cat binary.cpp
+//Excercise 2 Program 2
+//Programed by AUMRUDH LAL KUMAR TJ
+//Program to do binary search
+#include<iostream>
+using namespace std;
+main()
+{
+     int *p;
+     int n,i,key,low,high,mid;
+     cout<<"Enter the no.of elements\n";
+     cin>>n;
+     p=new int[n];
+     cout<<"Enter the elements in ascending order\n";
+     for(i=0;i<n;i++)
+     cin>>p[i];
+     low=0;
+     high=n-1;
+     mid=(low+high)/2;
+     cout<<"Enter the search element\n";
+     cin>>key;
+     while(low<=high)
+     {
+       if(p[mid]==key)
+        {
+          cout<<key<<"is found at position"<<mid+1<<"\n";
+          break;
+        }
+       else if(p[mid]<key)
+        {
+         low=mid+1;
+        }
+       else 
+        {
+         high=mid-1;
+        }
+       mid = (low +high)/2; 
+       if(low>high)
+        {
+          cout<<key<<"is not found\n";
+          break;
+        }
+     }
+}
+      
+      
+bash-3.2$ c++ binary.cpp
+bash-3.2$ ./a.out
+Enter the no.of elements
+5
+Enter the elements in ascending order
+1 2
+3 4 5
+Enter the search element
+4
+4is found at position4
+bash-3.2$ cat si.cpp
+//Excercise 2 Program 3
+//Programed by AUMRUDH LAL KUMAR TJ
+//Program to calculate si
+#include<iostream>
+using namespace std;
+void SI(int&,int&,float&);
+main()
+{
+   int p,n;  
+   float r;
+   cout<<"Enter principle,no.of years,rate of intrest\n";
+   cin>>p>>n>>r;
+   SI(p,n,r);
+}
+void SI(int &p,int &n,float &r)
+{
+   float si;
+   si=(p*n*r)/100;
+   cout<<"The simple intrest is "<<si;
+   cout<<"\n";
+}
+   
+bash-3.2$ c++ si.cpp
+bash-3.2$ ./a.out
+Enter principle,no.of years,rate of intrest
+1000
+2
+.5
+The simple intrest is 10
+bash-3.2$ cat bank.cpp
+//Excercise 2 Program 4
+//Programed by AUMRUDH LAL KUMAR TJ
+//Bank Program
+#include<iostream>
+#include<string>
+using namespace std;
+class bank
+{
+ private:
+         int acno;
+         string name;
+         float balance;
+         float deposit;
+         float withdraw;
+ public:
+        void read();
+        void draw();
+        void dep();
+};
+void bank::read()
+{
+   cout<<"Enter account no\n";
+   cin>>acno;
+   cout<<"Enter name of account holder\n";
+   cin>>name;
+   cout<<"Enter the opening balance\n";
+   cin>>balance;
+}
+void bank::draw()
+{
+   cout<<"Enter the withdrawal amount\n";
+   cin>>withdraw;
+   balance-=withdraw;
+   cout<<"The account no "<<acno<<" is debited with Rs "<<withdraw<<" and the new balance is "<<balance;
+   cout<<"\n";
+}
+void bank::dep()
+{
+   cout<<"Enter the deposite amount\n";
+   cin>>deposit;
+   balance+=deposit;
+   cout<<"The account no "<<acno<<" is credited with Rs "<<deposit<<" and the new balance is "<<balance;
+   cout<<"\n";
+}
+main()
+{
+    bank *b;
+    b=new bank;
+    int choice;
+    b->read();
+    cout<<"1.Deposit\n2.Withdraw\n";
+    cout<<"Enter your choice\n";
+    cin>>choice;
+    if(choice==1)
+    {
+      b->dep();
+    }
+    else  if(choice==2)
+    {
+      b->draw();
+    }
+    else 
+    {
+     cout<<"Invalid Choice\n";
+    }
+}
+bash-3.2$ c++ bank.cpp
+bash-3.2$ ./a.out
+Enter account no
+4005
+Enter name of account holder
+aumrudh
+Enter the opening balance
+10000
+1.Deposit
+2.Withdraw
+Enter your choice
+1
+Enter the deposite amount
+1000
+The account no 4005 is credited with Rs 1000 and the new balance is 11000
+bash-3.2$ ./a.out
+Enter account no
+00456
+Enter name of account holder
+lal
+Enter the opening balance
+1000
+1.Deposit
+2.Withdraw
+Enter your choice
+2
+Enter the withdrawal amount
+100
+The account no 456 is debited with Rs 100 and the new balance is 900
+bash-3.2$ exit
+exit
+
+Script done on Thu 14 Feb 2019 12:53:40 PM IST

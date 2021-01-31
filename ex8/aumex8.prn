@@ -1,0 +1,351 @@
+Script started on Fri 29 Mar 2019 02:07:22 PM IST
+bash-3.2$ cat student.cpp
+//Excersie 8 Program 1
+//Programmed by AUMRUDH LAL KUMAR TJ
+//Program to make rank list
+#include<iostream>
+#include<string>
+using namespace std;
+class student /*Class Student*/
+{
+   int rno;
+   string name;
+   int mark[6];
+   int total;
+  public:
+       int rank;
+       void readdetails()
+       { 
+         total=0;
+         cout<<"Enter rollno:\n";
+         cin>>rno;
+         cout<<"Enter name:\n";
+         cin>>name;
+         cout<<"Enter mark of 6 subjects:\n";
+         for(int i=0;i<6;i++)
+         {
+            cin>>mark[i];
+            total+=mark[i];
+         }
+      }
+       void printdetails()
+       {
+          cout<<rno<<"\t"<<name<<"\t"<<total<<"\t";
+       }
+      bool operator<(student &s)/* < operator*/
+      {
+         return(total<s.total);
+      }
+  };
+template <typename type> /*Template function*/
+void bubblesort(type a[],int m)
+{
+   type temp;
+   for(int i=0;i<m;i++)
+   {
+     for(int j=i+1;j<m;j++)
+     {
+      if(a[i]<a[j])
+      {
+         temp=a[i];
+         a[i]=a[j];
+         a[j]=temp;
+      }
+    }
+   
+  }
+}
+
+main()
+{
+   student s[20];
+   int n,i;
+   cout<<"Enter no of students:\n";
+   cin>>n;
+   for(int i=0;i<n;i++)
+   {
+     s[i].readdetails();
+   } 
+   bubblesort<student>(s,n);/*Template Call*/
+   cout<<"RollNo\tName\tTotal\tRank\n";
+   for(int j=0;j<n;j++)
+   { 
+     s[j].printdetails();
+     cout<<j+1<<"\n";
+   }
+}
+
+bash-3.2$ c++ student.cpp
+bash-3.2$ ./a.out
+Enter no of students:
+3
+Enter rollno:
+34
+Enter name:
+aumrudh
+Enter mark of 6 subjects:
+100 100 100 100 100 99
+Enter rollno:
+35
+Enter name:
+babbu
+Enter mark of 6 subjects:
+99 99 100 100 100 100
+Enter rollno:
+50
+Enter name:
+sanjai
+Enter mark of 6 subjects:
+100 100 100 100 100 98
+RollNo	Name	Total	Rank
+34	aumrudh	599	1
+35	babbu	598	2
+50	sanjai	598	3
+bash-3.2$ cat binary.cpp
+//Excercise 8 Program 2
+//Programmed by AUMRUDH LAL KUMAR TJ
+#include<iostream>
+#include<string>
+using namespace std;
+class item
+{
+    private:
+				    int ino;
+	          string name;
+     public:
+            void readdetails()
+            {
+              cout<<"Enter the item no\n";
+              cin>>ino;
+              cout<<"Enter the item name\n";
+              cin>>name;
+            }
+            void print()
+            {
+             cout<<ino<<"\t"<<name<<"\n";
+            }
+            bool operator==(item &IT)
+            {
+              return(ino==IT.ino);
+            }
+            bool operator>(item &IT)
+            {
+               return(ino>IT.ino);
+            }
+
+};
+template<typename type>
+int binarysearch(type  a[],type key,int size)
+{
+    int low=0,high=size-1,mid;
+    while(low<=high)
+     {
+       mid=(low+high)/2;
+       if(a[mid]==key)
+       {
+        return mid+1;
+       }
+       else if(a[mid]>key)
+       {
+          high=mid-1;
+       }
+       else
+       {
+          low=mid+1;
+       }
+    }
+   return -1;  
+}
+main()
+{
+    item it[10],search;
+    int n,i,position;
+    cout<<"Enter the number of items\n";
+    cin>>n;
+    for(i=0;i<n;i++)
+     {
+       it[i].readdetails();
+     }
+    cout<<"Enter the search details\n";
+    search.readdetails();
+    position=binarysearch<item>(it,search,n);
+    if(position!=-1)
+    {
+    cout<<"Element is present\n";
+    cout<<"Item No\tItem Name\n";
+    search.print();
+    }
+    else
+    {
+     cout<<"The Elements is not present";
+    }
+} 
+       
+bash-3.2$ c++ binary.cpp
+bash-3.2$ ./a.out
+Enter the number of items
+3
+Enter the item no
+1
+Enter the item name
+pen
+Enter the item no
+2
+Enter the item name
+book
+Enter the item no
+3
+Enter the item name
+note
+Enter the search details
+Enter the item no
+2
+Enter the item name
+book
+Element is present
+Item No	Item Name
+2	book
+bash-3.2$ cat spl.cpp
+//Ex 8 Program 3
+//Programmed by AUMRUDH LAL KUMAR TJ
+//Program to sort based on dept and roll no
+#include<iostream>
+#include<string>
+using namespace std;
+template<typename type>
+void sort(type a[],int size);
+class student
+{
+  private:
+				   int rno;
+					 string name;
+		       string dept;
+  public:
+           template<class>
+           friend void sort(student ts[],int size);
+           void print()
+           {
+		         cout<<rno<<"\t"<<name<<"\t"<<" "<<dept<<"\n";
+           }
+					 void readdetails()
+           {
+            cout<<"Enter roll no\n";
+            cin>>rno;
+					  cout<<"Enter name\n";
+            cin>>name;
+						cout<<"Enter Department\n";
+            cin>>dept;
+           }
+           bool operator<(student &s)
+           {
+             return (dept<s.dept);
+           }
+           
+};
+template<typename type>
+void sort(type ts[],int size)
+{
+    type temp;
+    for(int i=0;i<size-1;i++)
+    {
+     for(int j=i+1;j<size;j++)
+      {
+        if(ts[i]<ts[j])
+         {
+          temp=ts[i];
+          ts[i]=ts[j];
+          ts[j]=temp;
+         }
+     }
+   }
+}
+template<class>
+void sort(student ts[],int size)
+{
+	  student temp;
+    for(int i=0;i<size-1;i++)
+	  {
+     for(int j=i+1;j<size;j++)
+			{
+				if(ts[i].dept<ts[j].dept)
+				 {
+					temp=ts[i];
+ 				  ts[i]=ts[j];
+				  ts[j]=temp;
+         }
+        else
+         {
+           if(ts[i].dept==ts[j].dept)
+             {
+               if(ts[i].rno<ts[j].rno)
+								 {
+									temp=ts[i];
+									ts[i]=ts[j];
+									ts[j]=temp;
+								 }
+						 }
+				  }
+      }
+		 }
+}
+main()
+{
+   student s[10];
+   int i,n;
+	 cout<<"Enter the no of student\n";
+   cin>>n;
+   for(i=0;i<n;i++)
+   {
+    s[i].readdetails();
+   }
+   cout<<"RollNo\tName \t Department\n";
+   sort(s,n);
+   for(i=0;i<n;i++)
+   {
+     s[i].print();
+   }
+}   
+bash-3.2$ c++ spl.cpp
+bash-3.2$ ./a.out
+Enter the no of student
+5
+Enter roll no
+34
+Enter name
+lal
+Enter Department
+cse
+Enter roll no
+35
+Enter name
+babu
+Enter Department
+cse
+Enter roll no
+51
+Enter name
+sankar
+Enter Department
+cse
+Enter roll no
+50
+Enter name
+sanjai
+Enter Department
+mech
+Enter roll no
+37
+Enter name
+chandru
+Enter Department
+it
+RollNo	Name 	 Department
+50	   sanjai	 mech
+37	   chandru it
+51	   sankar	 cse
+34	   lal	   cse
+35	   babu	   cse
+bash-3.2$ exit
+exit
+
+Script done on Fri 29 Mar 2019 02:09:52 PM IST

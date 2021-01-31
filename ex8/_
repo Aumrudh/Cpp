@@ -1,0 +1,79 @@
+//Ex 8 Pgm 1
+//AUMRUDH LAL KUMAR TJ
+#include<iostream>
+#include<string>
+using namespace std;
+class student
+{
+int rno;
+string name;
+int mark[6];
+int total;
+public:
+void read()
+{
+cout<<"\nEnter the roll no: ";
+cin>>rno;
+cout<<"Enter the name: ";
+cin>>name;
+total=0;
+cout<<"Enter the marks for 6 subjects: ";
+for(int i=0;i<6;i++)
+{
+cin>>mark[i];
+total+=mark[i];
+}
+}
+void print()
+{
+cout<<"\nRoll No :"<<rno;
+cout<<"\nName :"<<name;
+cout<<"\nMark : ";
+for(int i=0;i<6;i++)
+{
+cout<<mark[i];
+cout<<"\t";
+}
+cout<<"\nTotal :"<<total;
+}
+bool operator <(student &s)
+{
+return(total<s.total);
+}
+};
+template <typename type>
+void bubblesort(type a[],int n)
+{
+type temp;
+for(int i=0;i<n-1;i++)
+{
+for(int j=i+1;j<n;j++)
+{
+if(a[i]<a[j])
+{
+temp=a[i];
+a[i]=a[j];
+a[j]=temp;
+}
+}
+}
+}
+main()
+{
+student s[20];
+int i,n;
+cout<<"\nEnter the no of students :";
+cin>>n;
+for(int i=0;i<n;i++)
+{
+s[i].read();
+}
+bubblesort<student>(s,n);
+for(int i=0;i<n;i++)
+{
+s[i].print();
+cout<<"\nRank :"<<i+1;
+}
+}
+
+

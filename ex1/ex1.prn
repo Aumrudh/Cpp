@@ -1,0 +1,324 @@
+Script started on Fri 01 Feb 2019 03:55:05 PM IST
+bash-3.2$ cat student.cpp
+//Excercise 1 Program 1
+//Programed by AUMRUDH LAL KUMAR TJ
+//Program to calculate marks of students
+#include<iostream>
+#include<string>
+using namespace std;
+class student
+{
+  private:
+          int rno;
+          string name;
+          int mark[6];
+          int total;
+          float avg;
+  public:
+         void readmarks();
+         void calculatemarks();
+         void printmarks();
+};
+void student::readmarks()
+{
+  cout<<"Enter Roll NO\n";
+  cin>>rno;
+  cout<<"Enter Name\n";
+  cin>>name;
+  cout<<"Enter The marks\n";
+  for(int i=0;i<6;i++)
+  {
+   cin>>mark[i];
+  }
+}
+void student::calculatemarks()
+{
+  total=0;
+  for(int i=0;i<6;i++)
+  total=total+mark[i];
+  avg=total/6;
+}
+void student::printmarks()
+{
+   cout<<"Roll No:\t"<<rno;
+   cout<<"\nName:\t"<<name;
+   cout<<"\nMarks\n";
+   for(int i=0;i<6;i++)
+   {
+    cout<<mark[i]<<"\n";
+   }
+   cout<<"Total:\t"<<total;
+   cout<<"\nAverage:  "<<avg;
+   cout<<"\n";
+}
+main()
+{
+   student s[10];
+   int n,i;
+   cout<<"Enter No. Of students\n";
+   cin>>n;
+   for(i=0;i<n;i++)
+    {
+     s[i].readmarks();
+     s[i].calculatemarks();
+     s[i].printmarks();
+    }
+}
+bash-3.2$ c++ student.cpp
+bash-3.2$ ./a.out
+Enter No. Of students
+2
+Enter Roll NO
+1
+Enter Name
+Anbu
+Enter The marks
+100
+95
+99
+96
+89
+100
+Roll No:	1
+Name:	Anbu
+Marks
+100
+95
+99
+96
+89
+100
+Total:	579
+Average:  96
+Enter Roll NO
+2
+Enter Name
+Bapu
+Enter The marks
+100
+88
+99
+99
+96
+86
+Roll No:	2
+Name:	Bapu
+Marks
+100
+88
+99
+99
+96
+86
+Total:	568
+Average:  94
+bash-3.2$ cat employee.cpp
+//Exercise 1 Program 2
+//Programed by AUMRUDH LAL KUMAR TJ
+//Program to calculate employee details
+#include<iostream>
+#include<string>
+using namespace std;
+class employee
+{
+  private:
+           int eid;
+           string name;
+           float da;
+           float hra;
+           float deduct;
+           float bpay;
+           float gpay;
+           float npay;
+   public:
+          void readdetails();
+          void calculatepay();
+          void printpay();
+};
+void employee::readdetails()
+{
+   cout<<"Enter Employee id\n";
+   cin>>eid;
+   cout<<"Enter Name\n";
+   cin>>name;
+   cout<<"Enter Basic Pay\n";
+   cin>>bpay;
+   cout<<"Enter Da Hra Deduct without percentage\n";
+   cin>>da>>hra>>deduct;
+}
+void employee::calculatepay()
+{
+  gpay=npay=0.0;
+  gpay=bpay+(da*bpay)+(hra*bpay);
+  npay=gpay-(deduct*bpay);   
+}
+void employee::printpay()
+{
+   cout<<"Employee ID:\t"<<eid;
+   cout<<"\nName:\t"<<name;
+   cout<<"\nBasicPay:\t"<<bpay;
+   cout<<"\nGrossPay:\t"<<gpay;
+   cout<<"\nNetpay:  "<<npay<<"\n";
+}
+main()
+{
+   employee e[10];
+   int n,i;
+   cout<<"Enter No of employees\n";
+   cin>>n;
+   for(i=0;i<n;i++)
+   {
+    e[i].readdetails();
+    e[i].calculatepay();
+    e[i].printpay();
+   }
+}
+bash-3.2$ c++ employee.cpp
+bash-3.2$ ./.aout
+bash: ./.aout: No such file or directory
+bash-3.2$ ./a.out
+Enter No of employees
+2
+Enter Employee id
+1
+Enter Name
+raj
+Enter Basic Pay
+1000
+Enter Da Hra Deduct without percentage
+0.2
+0.4
+0.3
+Employee ID:	1
+Name:	raj
+BasicPay:	1000
+GrossPay:	1600
+Netpay:  1300
+Enter Employee id
+2
+Enter Name
+raju
+Enter Basic Pay
+15000
+Enter Da Hra Deduct without percentage
+.6
+.8
+.5
+Employee ID:	2
+Name:	raju
+BasicPay:	15000
+GrossPay:	36000
+Netpay:  28500
+bash-3.2$ cat bill.cpp
+//Exercise 1 Program 3
+//Programed by AUMRUDH LAL KUMAR TJ
+//Program to calculate bill
+#include<iostream>
+#include<string>
+using namespace std;
+class store
+{
+   private: 
+  				 int ino;
+  				 string name;
+				   int quantity;
+   public:
+           float amount,price;
+           void readdata();
+           void calculate();
+           void print();
+};
+void store::readdata()
+{
+   cout<<"Enter the item no.\n";
+   cin>>ino;
+   cout<<"Enter Name\n";
+   cin>>name;
+   cout<<"Enter Quantity\n";
+   cin>>quantity;
+   cout<<"Enter price\n";
+   cin>>price;
+}
+void store::calculate()
+{
+   amount=price*quantity;
+ //  cout<<amount;
+}
+void store::print()
+{
+   cout<<"\nItem NO:\t"<<ino;
+   cout<<"\nName:\t"<<name;
+   cout<<"\nQuantity:\t"<<quantity;
+   cout<<"\nPrice:\t"<<price;
+   cout<<"\nAmount:\t"<<amount;
+}
+main()
+{
+   store bill[100];
+   int i,n;
+   float total=0.0;
+   cout<<"Enter no of items\n";
+   cin>>n;
+   for(i=0;i<n;i++)
+    {
+     bill[i].readdata();
+     }
+   for(i=0;i<n;i++)
+    {
+      bill[i].calculate();
+      total+=bill[i].amount;
+      bill[i].print();
+    }
+   cout<<"\nTotal:\t"<<total;
+   cout<<"\n";
+}
+ 
+bash-3.2$ c++ bill.cpp
+bash-3.2$ ./a.out
+Enter no of items
+3
+Enter the item no.
+1
+Enter Name
+pen
+Enter Quantity
+2
+Enter price
+10
+Enter the item no.
+2
+Enter Name
+pencil
+Enter Quantity
+5
+Enter price
+2
+Enter the item no.
+3
+Enter Name
+5star
+Enter Quantity
+5
+Enter price
+10
+
+Item NO:	1
+Name:	pen
+Quantity:	2
+Price:	10
+Amount:	20
+Item NO:	2
+Name:	pencil
+Quantity:	5
+Price:	2
+Amount:	10
+Item NO:	3
+Name:	5star
+Quantity:	5
+Price:	10
+Amount:	50
+Total:	80
+bash-3.2$ exit
+exit
+
+Script done on Fri 01 Feb 2019 04:00:22 PM IST
